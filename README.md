@@ -1,2 +1,4 @@
 # ocr-app
-Create ocr app to calculate expression (using koin DI + room db + file read-write system + coroutine)
+Create image-to-text (OCR) app to calculate first-only expression
+
+Tech stack: koin DI + room db + file read-write system + coroutine
