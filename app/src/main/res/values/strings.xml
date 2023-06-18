@@ -1,0 +1,7 @@
+<resources>
+    <string name="choose_method">Ambil Gambar</string>
+    <string name="error_camera_permission">Anda harus mengaktifkan permission camera dahulu</string>
+    <string name="error_gallery_permission">Anda harus mengaktifkan permission akses galeri dahulu</string>
+    <string name="use_file">Gunakan penyimpanan file</string>
+    <string name="use_db">Gunakan penyimpanan database</string>
+</resources>

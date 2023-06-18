@@ -1,0 +1,116 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(rootProject.file("gradle.properties")))
+
+android {
+    compileSdkVersion configVersion.targetSdk
+
+    defaultConfig {
+        applicationId configVersion.applicationId
+        minSdkVersion configVersion.minSdk
+        targetSdkVersion configVersion.targetSdk
+        versionCode configVersion.versionCode
+        versionName configVersion.name
+
+        buildConfigField "String", "FILE_ENCRYPTOR_KEY", localProperties['file_secret_key']
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    flavorDimensions("default")
+
+    productFlavors {
+        redGallery {
+            resValue "string", "app_name", "Red Calculator Gallery"
+            resValue "string", "file_provider", "com.example.ocr.fileprovider.red.gallery"
+            manifestPlaceholders = [appTheme: "@style/Theme.MyApplication.Red"]
+            applicationIdSuffix ".red.gallery"
+            multiDexEnabled true
+        }
+        redCamera {
+            resValue "string", "app_name", "Red Calculator Camera"
+            resValue "string", "file_provider", "com.example.ocr.fileprovider.red.camera"
+            manifestPlaceholders = [appTheme: "@style/Theme.MyApplication.Red"]
+            applicationIdSuffix ".red.camera"
+            multiDexEnabled true
+        }
+        greenGallery {
+            resValue "string", "app_name", "Green Calculator Gallery"
+            resValue "string", "file_provider", "com.example.ocr.fileprovider.green.gallery"
+            manifestPlaceholders = [appTheme: "@style/Theme.MyApplication.Green"]
+            applicationIdSuffix ".green.gallery"
+            multiDexEnabled true
+        }
+        greenCamera {
+            resValue "string", "app_name", "Green Calculator Camera"
+            resValue "string", "file_provider", "com.example.ocr.fileprovider.green.camera"
+            manifestPlaceholders = [appTheme: "@style/Theme.MyApplication.Green"]
+            applicationIdSuffix ".green.camera"
+            multiDexEnabled true
+        }
+    }
+}
+
+dependencies {
+
+    implementation kotlinDefault.stdlib
+    implementation kotlinDefault.coroutinesCore
+    implementation kotlinDefault.coroutinesAndroid
+
+    implementation androidX.appCompatX
+    implementation androidX.coreKtx
+
+    implementation androidX.recyclerX
+    implementation androidX.cardX
+    implementation androidX.fragmentKtx
+    implementation androidX.constraintLayout
+    implementation androidX.material
+
+    // image
+    implementation libraries.glide
+    implementation libraries.glideOkhttp
+    kapt libraries.glideCompiler
+
+    // DI
+    implementation libraries.koin
+    implementation libraries.koinViewmodel
+    implementation libraries.koinScope
+    implementation libraries.javaxInject
+
+    // ui
+    implementation libraries.sdp
+    implementation libraries.ssp
+
+    //room
+    implementation androidX.roomRuntime
+    kapt androidX.roomCompiler
+    implementation androidX.roomKtx
+
+    implementation google.vision
+    implementation google.guava
+}
