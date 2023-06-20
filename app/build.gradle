@@ -30,8 +30,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     kotlinOptions {
@@ -42,36 +42,66 @@ android {
         viewBinding true
     }
 
-    flavorDimensions("default")
+    task buildAllDimensions {
+        group 'build'
+        description 'Build all flavor dimensions'
 
-    productFlavors {
-        redGallery {
-            resValue "string", "app_name", "Red Calculator Gallery"
-            resValue "string", "file_provider", "com.example.ocr.fileprovider.red.gallery"
-            manifestPlaceholders = [appTheme: "@style/Theme.MyApplication.Red"]
-            applicationIdSuffix ".red.gallery"
-            multiDexEnabled true
+        doLast {
+            def flavors =["RedCamera", "RedGallery", "GreenGallery", "GreenCamera"]
+
+            flavors.each { flavor ->
+                def flavorName = "${flavor}"
+
+                def assembleTask = project.tasks.findByName("assemble${flavorName}")
+                if (assembleTask != null) {
+                    assembleTask.execute()
+                } else {
+                    println "Task assemble${flavorName.capitalize()} not found."
+                }
+            }
         }
-        redCamera {
-            resValue "string", "app_name", "Red Calculator Camera"
-            resValue "string", "file_provider", "com.example.ocr.fileprovider.red.camera"
-            manifestPlaceholders = [appTheme: "@style/Theme.MyApplication.Red"]
-            applicationIdSuffix ".red.camera"
-            multiDexEnabled true
-        }
-        greenGallery {
-            resValue "string", "app_name", "Green Calculator Gallery"
-            resValue "string", "file_provider", "com.example.ocr.fileprovider.green.gallery"
-            manifestPlaceholders = [appTheme: "@style/Theme.MyApplication.Green"]
-            applicationIdSuffix ".green.gallery"
-            multiDexEnabled true
-        }
-        greenCamera {
-            resValue "string", "app_name", "Green Calculator Camera"
-            resValue "string", "file_provider", "com.example.ocr.fileprovider.green.camera"
-            manifestPlaceholders = [appTheme: "@style/Theme.MyApplication.Green"]
-            applicationIdSuffix ".green.camera"
-            multiDexEnabled true
+    }
+
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
+
+    flavorDimensions("color")
+
+    splits {
+        productFlavors {
+            redGallery {
+                dimension "color"
+                resValue "string", "app_name", "Red Calculator Gallery"
+                resValue "string", "file_provider", "com.example.ocr.fileprovider.red.gallery"
+                manifestPlaceholders = [appTheme: "@style/Theme.MyApplication.Red"]
+                applicationIdSuffix ".red.gallery"
+                multiDexEnabled true
+            }
+            redCamera {
+                dimension "color"
+                resValue "string", "app_name", "Red Calculator Camera"
+                resValue "string", "file_provider", "com.example.ocr.fileprovider.red.camera"
+                manifestPlaceholders = [appTheme: "@style/Theme.MyApplication.Red"]
+                applicationIdSuffix ".red.camera"
+                multiDexEnabled true
+            }
+            greenGallery {
+                dimension "color"
+                resValue "string", "app_name", "Green Calculator Gallery"
+                resValue "string", "file_provider", "com.example.ocr.fileprovider.green.gallery"
+                manifestPlaceholders = [appTheme: "@style/Theme.MyApplication.Green"]
+                applicationIdSuffix ".green.gallery"
+                multiDexEnabled true
+            }
+            greenCamera {
+                dimension "color"
+                resValue "string", "app_name", "Green Calculator Camera"
+                resValue "string", "file_provider", "com.example.ocr.fileprovider.green.camera"
+                manifestPlaceholders = [appTheme: "@style/Theme.MyApplication.Green"]
+                applicationIdSuffix ".green.camera"
+                multiDexEnabled true
+            }
         }
     }
 }
