@@ -68,40 +68,38 @@ android {
 
     flavorDimensions("color")
 
-    splits {
-        productFlavors {
-            redGallery {
-                dimension "color"
-                resValue "string", "app_name", "Red Calculator Gallery"
-                resValue "string", "file_provider", "com.example.ocr.fileprovider.red.gallery"
-                manifestPlaceholders = [appTheme: "@style/Theme.MyApplication.Red"]
-                applicationIdSuffix ".red.gallery"
-                multiDexEnabled true
-            }
-            redCamera {
-                dimension "color"
-                resValue "string", "app_name", "Red Calculator Camera"
-                resValue "string", "file_provider", "com.example.ocr.fileprovider.red.camera"
-                manifestPlaceholders = [appTheme: "@style/Theme.MyApplication.Red"]
-                applicationIdSuffix ".red.camera"
-                multiDexEnabled true
-            }
-            greenGallery {
-                dimension "color"
-                resValue "string", "app_name", "Green Calculator Gallery"
-                resValue "string", "file_provider", "com.example.ocr.fileprovider.green.gallery"
-                manifestPlaceholders = [appTheme: "@style/Theme.MyApplication.Green"]
-                applicationIdSuffix ".green.gallery"
-                multiDexEnabled true
-            }
-            greenCamera {
-                dimension "color"
-                resValue "string", "app_name", "Green Calculator Camera"
-                resValue "string", "file_provider", "com.example.ocr.fileprovider.green.camera"
-                manifestPlaceholders = [appTheme: "@style/Theme.MyApplication.Green"]
-                applicationIdSuffix ".green.camera"
-                multiDexEnabled true
-            }
+    productFlavors {
+        redGallery {
+            dimension "color"
+            resValue "string", "app_name", "Red Calculator Gallery"
+            resValue "string", "file_provider", "com.example.ocr.fileprovider.red.gallery"
+            manifestPlaceholders = [appTheme: "@style/Theme.MyApplication.Red"]
+            applicationIdSuffix ".red.gallery"
+            multiDexEnabled true
+        }
+        redCamera {
+            dimension "color"
+            resValue "string", "app_name", "Red Calculator Camera"
+            resValue "string", "file_provider", "com.example.ocr.fileprovider.red.camera"
+            manifestPlaceholders = [appTheme: "@style/Theme.MyApplication.Red"]
+            applicationIdSuffix ".red.camera"
+            multiDexEnabled true
+        }
+        greenGallery {
+            dimension "color"
+            resValue "string", "app_name", "Green Calculator Gallery"
+            resValue "string", "file_provider", "com.example.ocr.fileprovider.green.gallery"
+            manifestPlaceholders = [appTheme: "@style/Theme.MyApplication.Green"]
+            applicationIdSuffix ".green.gallery"
+            multiDexEnabled true
+        }
+        greenCamera {
+            dimension "color"
+            resValue "string", "app_name", "Green Calculator Camera"
+            resValue "string", "file_provider", "com.example.ocr.fileprovider.green.camera"
+            manifestPlaceholders = [appTheme: "@style/Theme.MyApplication.Green"]
+            applicationIdSuffix ".green.camera"
+            multiDexEnabled true
         }
     }
 }
